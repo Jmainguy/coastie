@@ -5,14 +5,22 @@ import (
     "bufio"
     "fmt"
     "os"
+    "flag"
 )
 
 func main() {
 
+    node := flag.String("node", "", "Node to connect to")
+    port := flag.String("port", "", "Port to connect to")
+
+    flag.Parse()
+
+    // Node + port
+    nodePort := fmt.Sprintf("%s:%s", *node, *port)
     // Connect
-    c, err := net.Dial("tcp", "localhost:8081")
+    c, err := net.Dial("tcp", nodePort)
     if err != nil {
-        fmt.Println("Server aint there bruh")
+        fmt.Println("ERROR: TCP unable to connect")
         os.Exit(1)
     }
     // Send message
@@ -20,9 +28,9 @@ func main() {
     c.Write([]byte(question))
     // Read response
     message, _ := bufio.NewReader(c).ReadString('\n')
-    if message == "Annie, are you ok?\n" {
+    if message == "So, Annie are you ok?\n" {
         message = fmt.Sprintf("Server: %s", message)
-        fmt.Printf(message)
+        fmt.Println("SUCCESS: TCP is working")
         c.Close()
         os.Exit(0)
     } else if message != "" {
