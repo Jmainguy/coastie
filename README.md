@@ -11,4 +11,6 @@ Coastie expects you have kubectl, and go installed.
 This base is currently in alpha status, and will likely move from bash to a dedicated app at a later point.
 
 ## How to use
+```/bin/bash
 ./coastie.sh
+```
