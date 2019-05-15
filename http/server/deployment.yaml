@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: httpserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: httpserver
+  template:
+    metadata:
+      labels:
+        app: httpserver
+    spec:
+      containers:
+        - name: httpserver
+          image: hub.soh.re/jmainguy/httpserver
+          ports:
+            - containerPort: 8080
+          resources:
+              limits:
+                  cpu: "0.5"
+                  memory: "100M"
+              requests:
+                  cpu: "0.5"
+                  memory: "100M"

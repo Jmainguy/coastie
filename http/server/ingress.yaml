@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: httpserver-ingress
+spec:
+  rules:
+  - host: REPLACEME
+    http:
+      paths:
+      - backend:
+          serviceName: httpserver-service
+          servicePort: 80
