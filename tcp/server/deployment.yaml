@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: tcpserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: tcpserver
+  template:
+    metadata:
+      labels:
+        app: tcpserver
+    spec:
+      containers:
+        - name: tcpserver
+          image: hub.soh.re/jmainguy/tcpserver
+          ports:
+            - containerPort: 8081
+          resources:
+              limits:
+                  cpu: "0.5"
+                  memory: "100M"
+              requests:
+                  cpu: "0.5"
+                  memory: "100M"
