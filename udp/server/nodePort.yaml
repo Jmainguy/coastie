@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: udpserver
+  labels:
+    name: udpserver
+spec:
+  type: NodePort
+  ports:
+    - name: udpserver
+      port: 8082
+      targetPort: 8082
+      protocol: UDP
+  selector:
+    app: udpserver
+

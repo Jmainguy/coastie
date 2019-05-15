@@ -18,23 +18,23 @@ func main() {
     // Node + port
     nodePort := fmt.Sprintf("%s:%s", *node, *port)
     // Connect
-    c, err := net.Dial("tcp", nodePort)
+    c, err := net.Dial("udp", nodePort)
     if err != nil {
-        fmt.Println("ERROR: TCP unable to connect")
+        fmt.Println("ERROR: UDP unable to connect")
         os.Exit(1)
     }
     // Send message
-    question := fmt.Sprintln("Annie, are you ok?\n")
+    question := fmt.Sprintln("ruok?")
     c.Write([]byte(question))
     // Read response
     message, _ := bufio.NewReader(c).ReadString('\n')
-    if message == "So, Annie are you ok?\n" {
+    if message == "imok\n" {
         message = fmt.Sprintf("Server: %s", message)
-        fmt.Println("SUCCESS: TCP is working")
+        fmt.Println("SUCCESS: UDP is working")
         c.Close()
         os.Exit(0)
     } else if message != "" {
-        message = fmt.Sprintf("ERROR: TCP Failed - Server: %s", message)
+        message = fmt.Sprintf("ERROR: UDP Failed - Server: %s", message)
         fmt.Printf(message)
         c.Close()
         os.Exit(1)

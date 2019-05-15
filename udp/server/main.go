@@ -31,18 +31,22 @@ func main() {
 
 	// Need a buffer, 1024 bytes sounds right, no message will be bigger than that, if it is, just read the first 1024
 	var buf [1024]byte
+    fmt.Println("Server is running")
 	for {
 		// Read the length of response, and the address of the person talking
 		rlen, remoteAddr, _ := conn.ReadFromUDP(buf[:])
 		// From start of buffer, 0, to end of response length, convert byte into a string (what did they say?)
 		msg := string(buf[0:rlen])
-		// Print who said it
-		fmt.Println(remoteAddr)
-		// Print what they said
-		fmt.Printf(msg)
-		// Think of what to ask them
-		responseMsg := "Sup Dawg?\n"
-		// Ask them, don't wait on response, its udp, we arent gonna get one anyways
+		// Print who said it and what they said
+        question := fmt.Sprintf("%s: %s", remoteAddr, msg)
+		fmt.Printf(question)
+		// Respond, don't wait on response, its udp, we arent gonna get one anyways
+        responseMsg := ""
+        if msg == "ruok?\n" {
+		    responseMsg = "imok\n"
+        } else {
+            responseMsg = "Ask me 'ruok?'\n"
+        }
 		go sendResponse(conn, remoteAddr, responseMsg)
 	}
 }
