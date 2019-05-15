@@ -1,5 +1,10 @@
 # Coastie
 
+## Purpose
+Coastie is a tool to help you check the health of your kubernetes cluster.
+
+It checks a number of k8 resources you likely care about, like tcp, udp, http etc etc.
+
 ## Requirements
 Coastie expects that you can create a new namespace, and deploy containers and services to it.
 
