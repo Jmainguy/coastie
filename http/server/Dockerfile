@@ -1,4 +1,4 @@
-FROM golang:1.21.3-alpine
+FROM golang:1.22.0-alpine
 WORKDIR /go/src/app
 ADD main.go .
 EXPOSE 8080
